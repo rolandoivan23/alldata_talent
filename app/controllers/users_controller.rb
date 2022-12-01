@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+
   end
 
   # POST /users or /users.json
@@ -58,9 +59,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def find
+
+  end
+
+  def find_results
+    skill = Skill.where("upper(name) LIKE ?", "%#{params[:query].upcase}%")
+    users = User.where("upper(full_name) LIKE ? ", "%#{params[:query].upcase}%" )
+    if skill
+      users_skills = UserSkill.where(skill: skill)
+      users_by_skill = users_skills.map { |row| row.user }
+    else
+      users_by_skill = []
+    end
+
+    puts users_by_skill
+    puts users
+
+    @users = users_by_skill + users
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
+      @skills = Skill.all
       @user = User.find(params[:id])
     end
 
