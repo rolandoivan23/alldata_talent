@@ -25,5 +25,21 @@
   <%= @user.rank %>
 </p>
 
+<p>
+  <h2>User skills</h2>
+  <hr>
+  <% @user.user_skills.each do |user_skill| %>
+    <div>
+      <span>
+        Skill name: <%= user_skill.skill.name %>  
+      </span>
+      <span>
+        Skill Rank: <%= user_skill.rank %>
+      </span>
+      
+    </div>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
