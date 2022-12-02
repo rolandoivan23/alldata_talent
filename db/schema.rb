@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_01_182556) do
+ActiveRecord::Schema.define(version: 2022_12_02_022139) do
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
@@ -19,4 +19,37 @@ ActiveRecord::Schema.define(version: 2022_12_01_182556) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tests", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "total_points"
+    t.integer "skill_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["skill_id"], name: "index_tests_on_skill_id"
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "skill_id", null: false
+    t.integer "rank"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "full_name"
+    t.string "department"
+    t.text "summary"
+    t.integer "ignition_id"
+    t.integer "rank"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "tests", "skills"
+  add_foreign_key "user_skills", "skills"
+  add_foreign_key "user_skills", "users"
 end

@@ -1,5 +1,8 @@
+
 class SkillsController < ApplicationController
   before_action :set_skill, only: %i[ show edit update destroy ]
+  include SkillsHelper
+
 
   # GET /skills or /skills.json
   def index
@@ -55,6 +58,18 @@ class SkillsController < ApplicationController
       format.html { redirect_to skills_url, notice: "Skill was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def validate_answer
+    answer = params[:answer]
+    phase = params[:phase].to_i
+    right_answer = get_answer_by_phase phase
+    response = answer == right_answer ? "right_answer(#{phase});" : "bad_answer(#{phase});"
+   
+    respond_to do |format|
+      format.js { render js: response }
+    end
+    
   end
 
   private

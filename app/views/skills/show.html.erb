@@ -10,5 +10,24 @@
   <%= @skill.description %>
 </p>
 
+<p>
+	<h2>Tests</h2>
+	<hr>
+	<% @skill.tests.each do |test| %>
+    <div>
+      <span>
+        test name: <%= test.name %>  
+      </span>
+      <span>
+        Skill Rank: <%= test.description %>
+      </span>
+      <span>
+      	<%= link_to 'Validate', test_path(test) %> |
+      </span>
+      
+    </div>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_skill_path(@skill) %> |
 <%= link_to 'Back', skills_path %>

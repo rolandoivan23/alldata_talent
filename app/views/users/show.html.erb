@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @user.full_name %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @user.department %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @user.summary %>
+</p>
+
+<p>
+  <strong>Ignition:</strong>
+  <%= @user.ignition_id %>
+</p>
+
+<p>
+  <strong>Rank:</strong>
+  <%= @user.rank %>
+</p>
+
+<p>
+  <h2>User skills</h2>
+  <hr>
+  <% @user.user_skills.each do |user_skill| %>
+    <div>
+      <span>
+        Skill name: <%= user_skill.skill.name %>  
+      </span>
+      <span>
+        Skill Rank: <%= user_skill.rank %>
+      </span>
+      
+    </div>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+

@@ -1,0 +1,18 @@
+
+
+<div>
+	<h2>Users Found</h2>
+	<div style="margin-top: 10px;">
+		<% @users.each do |user| %>
+			<div>
+				<span>
+					<%= user.full_name %>
+				</span>
+				<span>
+					<%= link_to 'Show', user %>
+				</span>
+			</div>
+			<hr>
+		<% end %>		
+	</div>
+</div>
