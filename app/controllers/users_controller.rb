@@ -68,15 +68,17 @@ class UsersController < ApplicationController
     users = User.where("upper(full_name) LIKE ? ", "%#{params[:query].upcase}%" )
     if skill
       users_skills = UserSkill.where(skill: skill)
-      users_by_skill = users_skills.map { |row| row.user }
+      users_by_skill = users_skills.map(&method(:map_user_with_rank)).sort_by{|e| -e[:rank]}
     else
       users_by_skill = []
     end
 
-    puts users_by_skill
-    puts users
-
     @users = users_by_skill + users
+  end
+
+  def map_user_with_rank(user_skill)
+    user_skill.user.rank = user_skill.rank
+    user_skill.user
   end
 
   private
@@ -88,6 +90,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:full_name, :department, :summary, :ignition_id, :rank)
+      params.require(:user).permit(:full_name, :department, :summary, :ignition_id, :rank, :email)
     end
 end

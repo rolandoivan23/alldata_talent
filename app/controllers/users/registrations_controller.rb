@@ -46,7 +46,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   
   def user_params
-    params.require(:user).permit(:ignition_id, :password, :password_confirmation, :full_name, :department, :summary)
+    params.require(:user).permit(:ignition_id, :password, :password_confirmation, :full_name, :department, :summary, :email)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

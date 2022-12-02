@@ -16,7 +16,7 @@
       <% @user_skills.each do |u_skill| %>
         <tr>
           <th scope="row"><%= u_skill.skill.name %></th>
-          <td><%= u_skill.rank %></td>
+          <td><%= $stars[u_skill.rank] %></td>
           <td><%= link_to 'Show', u_skill %></td>
           <td><%= link_to 'Edit', edit_user_skill_path(u_skill) %></td>
           <td><%= link_to 'Destroy', u_skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
