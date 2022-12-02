@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tests</h1>
+<h3>Tests</h3>
 
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Total points</th>
-      <th>Skill</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Total points</th>
+      <th scope="col">Skill</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,7 +16,7 @@
   <tbody>
     <% @tests.each do |test| %>
       <tr>
-        <td><%= test.name %></td>
+        <th scope="row"><%= test.name %></th>
         <td><%= test.description %></td>
         <td><%= test.total_points %></td>
         <td><%= test.skill_id %></td>
@@ -30,4 +30,6 @@
 
 <br>
 
-<%= link_to 'New Test', new_test_path %>
+<div class="float-right d-inline">
+  <%= link_to 'New Test', new_test_path, :class => 'btn btn-dark ', :style => 'color: #FFFFFF' %>
+</div>

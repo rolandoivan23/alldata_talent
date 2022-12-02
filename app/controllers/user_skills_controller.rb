@@ -12,7 +12,7 @@ class UserSkillsController < ApplicationController
 
     respond_to do |format|
       if @user_skill.save
-        format.html { redirect_to user_skills_url, notice: "User was successfully created." }
+        format.html { redirect_to user_skills_url, notice: "Skill was successfully added." }
         format.json { render :index, status: :created, location: @user_skill }
       else
         format.html { render :index, status: :unprocessable_entity }

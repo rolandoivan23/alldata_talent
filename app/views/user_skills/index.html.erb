@@ -2,11 +2,11 @@
 
 <h3>My Skills</h3>
 
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-      <th>Skill</th>
-      <th>Rank</th>
+      <th scope="col">Skill</th>
+      <th scope="col">Rank</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
     <% if @user_skills %>
       <% @user_skills.each do |u_skill| %>
         <tr>
-          <td><%= u_skill.skill.name %></td>
+          <th scope="row"><%= u_skill.skill.name %></th>
           <td><%= u_skill.rank %></td>
           <td><%= link_to 'Show', u_skill %></td>
           <td><%= link_to 'Edit', edit_user_skill_path(u_skill) %></td>

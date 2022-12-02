@@ -1,37 +1,45 @@
-<%= form_with(model: test) do |form| %>
-  <% if test.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
-
-      <ul>
-        <% test.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-book"></i>
+    Test
   </div>
+  <div class="card-body">
+    <%= form_with(model: test) do |form| %>
+      <% if test.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
+      
+          <ul>
+            <% test.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :name %>
+        <%= form.text_field :name, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :total_points %>
-    <%= form.number_field :total_points %>
-  </div>
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :description %>
+        <%= form.text_area :description, :class => 'form-control' %>
+      </div>
+            
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :total_points %>
+        <%= form.number_field :total_points, :class => 'form-control' %>
+      </div>
+            
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :skill_id %>
+        <%= form.select :skill_id, Skill.all.order(:name).collect {|r| [r.name, r.id]}, { :include_blank => true }, { :class => 'form-control'} %>
+      </div>
 
-  <div class="field">
-    <%= form.label :skill_id %>
-    <%= form.text_field :skill_id %>
+      <div class="form-actions mt-3">
+        <button type="submit" class="btn btn-dark">Save Test</button>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

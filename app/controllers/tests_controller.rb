@@ -25,8 +25,8 @@ class TestsController < ApplicationController
 
     respond_to do |format|
       if @test.save
-        format.html { redirect_to test_url(@test), notice: "Test was successfully created." }
-        format.json { render :show, status: :created, location: @test }
+        format.html { redirect_to tests_url, notice: "Test was successfully created." }
+        format.json { render :index, status: :created, location: @test }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @test.errors, status: :unprocessable_entity }
@@ -38,8 +38,8 @@ class TestsController < ApplicationController
   def update
     respond_to do |format|
       if @test.update(test_params)
-        format.html { redirect_to test_url(@test), notice: "Test was successfully updated." }
-        format.json { render :show, status: :ok, location: @test }
+        format.html { redirect_to tests_url, notice: "Test was successfully updated." }
+        format.json { render :index, status: :ok, location: @test }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @test.errors, status: :unprocessable_entity }

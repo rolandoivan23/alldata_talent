@@ -28,8 +28,8 @@ class SkillsController < ApplicationController
 
     respond_to do |format|
       if @skill.save
-        format.html { redirect_to skill_url(@skill), notice: "Skill was successfully created." }
-        format.json { render :show, status: :created, location: @skill }
+        format.html { redirect_to skills_url, notice: "Skill was successfully created." }
+        format.json { render :index, status: :created, location: @skill }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @skill.errors, status: :unprocessable_entity }
@@ -41,8 +41,8 @@ class SkillsController < ApplicationController
   def update
     respond_to do |format|
       if @skill.update(skill_params)
-        format.html { redirect_to skill_url(@skill), notice: "Skill was successfully updated." }
-        format.json { render :show, status: :ok, location: @skill }
+        format.html { redirect_to skills_url, notice: "Skill was successfully updated." }
+        format.json { render :index, status: :ok, location: @skill }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @skill.errors, status: :unprocessable_entity }
