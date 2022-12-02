@@ -8,8 +8,13 @@
 				<span>
 					<%= user.full_name %>
 				</span>
+				&nbsp;
 				<span>
 					<%= link_to 'Show', user %>
+				</span>
+				&nbsp;
+				<span>
+					<a href="https://teams.microsoft.com/l/chat/0/0?users=<%= user.email %>" target="_blank"><%= image_tag 'contact-teams.png', style: 'max-width: 80px;' %></a>
 				</span>
 			</div>
 			<hr>

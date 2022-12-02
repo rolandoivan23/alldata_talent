@@ -4,6 +4,14 @@ class UserSkillsController < ApplicationController
   def index
     @user_skills = UserSkill.includes(:skill).where(:user_id => current_user.id).order(:name)
     @user_skill = UserSkill.new
+    @stars = [
+      '☆☆☆☆☆',
+      '★☆☆☆☆',
+      '★★☆☆☆',
+      '★★★☆☆',
+      '★★★★☆',
+      '★★★★★'
+    ]
   end
 
   # POST /user_skills or /user_skills.json

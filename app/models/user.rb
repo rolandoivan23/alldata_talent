@@ -7,4 +7,5 @@ class User < ApplicationRecord
 	validates :ignition_id, uniqueness: true, presence: true
 	validates :full_name, presence: true
 	validates :department, presence: true
+	validates :email, uniqueness: true, presence: true
 end

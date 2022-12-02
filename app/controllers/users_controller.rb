@@ -73,9 +73,6 @@ class UsersController < ApplicationController
       users_by_skill = []
     end
 
-    puts users_by_skill
-    puts users
-
     @users = users_by_skill + users
   end
 
@@ -88,6 +85,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:full_name, :department, :summary, :ignition_id, :rank)
+      params.require(:user).permit(:full_name, :department, :summary, :ignition_id, :rank, :email)
     end
 end
