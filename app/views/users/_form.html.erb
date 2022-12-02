@@ -1,14 +1,14 @@
 <div class="card mb-4">
   <div class="card-header">
-      <i class="fas fa-user"></i>
-      User
+    <i class="fas fa-user"></i>
+    User
   </div>
   <div class="card-body">
     <%= form_with(model: user) do |form| %>
       <% if user.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-    
+
           <ul>
             <% user.errors.each do |error| %>
               <li><%= error.full_message %></li>
@@ -16,6 +16,11 @@
           </ul>
         </div>
       <% end %>
+
+      <div class="form form-input" style="width: 50%;">
+        <label>Ignition ID</label>
+        <%= form.number_field :ignition_id, :class => 'form-control' %>
+      </div>
 
       <div class="form form-input" style="width: 50%;">
         <label for="full_name">Full Name</label>
@@ -27,38 +32,20 @@
         <%= form.text_field :department, :class => 'form-control' %>
       </div>
             
-      <div class="field">
+      <div class="form form-input" style="width: 50%;">
         <%= form.label :summary %>
-        <%= form.text_area :summary %>
+        <%= form.text_area :summary, :class => 'form-control' %>
       </div>
             
-      <div class="field">
-        <%= form.label :ignition_id %>
-        <%= form.number_field :ignition_id %>
-      </div>
             
-      <div class="field">
-        <%= form.label :rank %>
-        <%= form.number_field :rank %>
+      <!--div class="form form-input" style="width: 50%;">
+        <form.label :rank>
+        <form.number_field :rank, :class => 'form-control'>
+      </div-->
+
+      <div class="form-actions mt-3">
+        <button type="submit" class="btn btn-dark">Save User</button>
       </div>
-            
-      <button>
-      add skill
-      </button>
-            
-      <div>
-        <label>Skill:</label>
-        <%= form.collection_select :user_skills, Skill.order(:name),:id,:name, include_blank: true %>
-      </div>
-            
-      <div>
-        <label>Rank:</label>
-        <%= form.number_field :rank, min:0, max:5 %>
-      </div>
-            
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-    <% end %> 
+    <% end %>
   </div>
 </div>
