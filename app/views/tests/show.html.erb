@@ -16,6 +16,12 @@
   <%= @test.total_points %>
 </p>
 
+<div id="correct-alert" class="alert alert-success" role="alert">
+  Respuesta correcta
+</div>
+<div id="wrong-alert" class="alert alert-danger" role="alert">
+  Respuesta incorrecta
+</div>
 
 <div class="card">
   <h5 class="card-header">Git challenge</h5>
@@ -38,6 +44,11 @@
 		  <%= form.text_area :answer, class: 'form-control' %>
 		  <%= form.submit "Send response", class: 'btn btn-primary' %>
 		<% end %>
+
+		<div id="correct" class="d-flex align-items-center justify-content-center" style="display: none !important;">
+			<%= image_tag 'correct.png', style: 'max-width: 300px;' %>
+		</div>
+
     
   </div>
 </div>
@@ -51,7 +62,20 @@
   .show{
     display: block;
   }
+
+  #correct-alert{
+  	display: none;
+  }
+
+  #wrong-alert{
+  	display: none;
+  }
 </style>
+
+<script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
 
 <script>
   let elemsStruct = {
@@ -64,22 +88,37 @@
     e = document.querySelector(`[id="${elemsStruct[phase].actual}"]`);
     e.classList = "question";
     if(elemsStruct[phase].next == null){
-      alert("Conseguiste la insignia de master en git");
+    	$.ajax({
+            type: "get",
+            url: `/user/${<%= @test.skill.id %>}/skill/${<%= current_user.id %>}/update_rank`,
+            data: {},
+            success: function (data) {
+                
+            }
+        })
+      	e = document.querySelector(`[id="correct"]`);
+      	e.style = "";
       //mostrar algo y gurdar en base de datos
       return;
     }else{
-      alert('Respuesta correcta');
+      $("#correct-alert").show();
+      setTimeout(()=>{
+      	$("#correct-alert").hide();
+      },  1200);
       
       e = document.querySelector(`[id="${elemsStruct[phase].next}"]`);
       e.classList = "question show";
       e = document.querySelector(`[id="question-no"]`);
-      e.html = `Question ${elemsStruct[phase].next}`;
+      e.textContent = `Question ${phase + 1}`;
     }
     
   }
 
   function bad_answer(phase){
-    alert('Intenta de nuevo')
+    $("#wrong-alert").show();
+      setTimeout(()=>{
+      	$("#wrong-alert").hide();
+      },  1200);
   }
 </script>
 

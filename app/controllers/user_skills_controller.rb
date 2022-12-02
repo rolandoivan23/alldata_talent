@@ -21,6 +21,17 @@ class UserSkillsController < ApplicationController
     end
   end
 
+  def update_rank
+    row = UserSkill.find_by_user_id_and_skill_id(params[:user_id], params[:skill_id])
+    row.rank = 0 if !row.rank 
+    row.rank += 1;
+    row.save
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Only allow a list of trusted parameters through.
     def user_skill_params
