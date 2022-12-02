@@ -12,22 +12,35 @@
 </p>
 
 <p>
-	<h2>Tests</h2>
+	<h4>Validate your skills</h4>
 	<hr>
-	<% @skill.tests.each do |test| %>
-    <div>
-      <span>
-        test name: <%= test.name %>  
-      </span>
-      <span>
-        Skill Rank: <%= test.description %>
-      </span>
-      <span>
-      	<%= link_to 'Validate', test_path(test) %> |
-      </span>
-      
-    </div>
-  <% end %>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Test name</th>
+				<th>Description</th>
+				<th>Validate</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @skill.tests.each do |test| %>
+			    <tr>
+			      <td>
+			         <%= test.name %>  
+			      </td>
+			      <td>
+			        Skill Rank: <%= test.description %>
+			      </td>
+			      <td>
+			      	<%= link_to 'Validate', test_path(test), class: 'btn btn-sm btn-info' %> 
+			      </td>
+			      
+			    </tr>
+			  <% end %>
+			
+		</tbody>
+	</table>
+	
 </p>
 
 <%= link_to 'Edit', edit_skill_path(@skill) %> |
