@@ -2,7 +2,7 @@ class UserSkillsController < ApplicationController
 
   # GET /user_skills or /user_skills.json
   def index
-    @user_skills = UserSkill.includes(:skill).where(:user_id => current_user.id).order(:name)
+    @user_skills = UserSkill.includes(:skill).where(:user_id => current_user.id)
     @user_skill = UserSkill.new
   end
 
