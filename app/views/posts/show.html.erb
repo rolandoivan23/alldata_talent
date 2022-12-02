@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <h3><%= @post.title %></h3>
+    </div>
+    <div class="col-md-6">
+      <h4 style="color: cadetblue;"><%= @post.skill.name %></h4>
+    </div>
+  </div>
+</div>
+
+<p>
+  <strong>Author:</strong>
+  <%= @post.user.full_name %>
+</p>
+
+<p>
+  <%= @post.content %>
+</p>
+
+<br/>
+<b>Comments</b>
+<br/>
+<% @comments.each do |comment| %>
+  <label><%= comment.user.full_name %> said: <%= comment.content %></label>
+  <br/>
+<% end %>
+
+<br/>
+<br/>
+<label>Write a comment</label>
+<%= form_with(model: @comment) do |form| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being published:</h2>
+
+      <ul>
+        <% @comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+        
+  <div class="form form-input" style="width: 100%;">
+    <%= form.text_area :content, :class => 'form-control' %>
+  </div>
+        
+  <%= form.hidden_field :post_id, :value => @post.id, :class => 'form-control' %>
+
+  <%= form.hidden_field :user_id, :value => current_user.id, :class => 'form-control' %>
+        
+  <div class="form-actions mt-3">
+    <button type="submit" class="btn btn-dark">Comment</button>
+  </div>
+<% end %>

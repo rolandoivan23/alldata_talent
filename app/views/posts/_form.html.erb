@@ -1,0 +1,42 @@
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fa-solid fa-paste"></i>
+    Post
+  </div>
+  <div class="card-body">
+    <%= form_with(model: post) do |form| %>
+      <% if post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+          <ul>
+            <% post.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+            
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :title %>
+        <%= form.text_field :title, :class => 'form-control' %>
+      </div>
+            
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :content %>
+        <%= form.text_area :content, :class => 'form-control' %>
+      </div>
+            
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :skill_id %>
+        <%= form.select :skill_id, Skill.all.order(:name).collect {|r| [r.name, r.id]}, { :include_blank => true }, { :class => 'form-control'} %>
+      </div>
+
+      <%= form.hidden_field :user_id, :value => current_user.id, :class => 'form-control' %>
+            
+      <div class="form-actions mt-3">
+        <button type="submit" class="btn btn-dark">Save Post</button>
+      </div>
+    <% end %>
+  </div>
+</div>

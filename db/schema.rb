@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_02_183353) do
+ActiveRecord::Schema.define(version: 2022_12_02_192326) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "skill_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["skill_id"], name: "index_posts_on_skill_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
@@ -55,6 +76,10 @@ ActiveRecord::Schema.define(version: 2022_12_02_183353) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "posts", "skills"
+  add_foreign_key "posts", "users"
   add_foreign_key "tests", "skills"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
