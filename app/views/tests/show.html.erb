@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @test.name %>
+  <h1>
+  	<%= @test.name %>
+  </h1>
 </p>
 
 <p>
@@ -15,28 +16,33 @@
   <%= @test.total_points %>
 </p>
 
-<p>
-  <strong>Skill:</strong>
-  <%= @test.skill_id %>
-</p>
 
-<%= form_with url: "/test/1.js", method: :post, format: :js, html: {id: "uno", class: 'question show'}, remote: true do |form| %>
-  <%= form.label :answer, "What is the command to initialize a git repo:" %>
-  <%= form.text_area :answer %>
-  <%= form.submit "Done" %>
-<% end %>
+<div class="card">
+  <h5 class="card-header">Git challenge</h5>
+  <div class="card-body">
+    <h5 id="question-no" class="card-title">Question 1</h5>
+    <%= form_with url: "/test/1.js", method: :post, format: :js, html: {id: "uno", class: 'question show'}, local: false do |form| %>
+		  <%= form.label :answer, "What is the command to initialize a git repo:" %>
+		  <%= form.text_area :answer, class: 'form-control' %>
+		  <%= form.submit "Send response", class: 'btn btn-primary' %>
+		<% end %>
 
-<%= form_with url: "/test/2.js", method: :post, format: :js,html: {id: "dos",  class: 'question'}, remote: true do |form| %>
-  <%= form.label :answer, "What is the command to view the comit history:" %>
-  <%= form.text_area :answer %>
-  <%= form.submit "Done" %>
-<% end %>
+		<%= form_with url: "/test/2.js", method: :post, format: :js,html: {id: "dos",  class: 'question'}, local: false do |form| %>
+		  <%= form.label :answer, "What is the command to view the comit history:" %>
+		  <%= form.text_area :answer, class: 'form-control'%>
+		  <%= form.submit "Send response", class: 'btn btn-primary' %>
+		<% end %>
 
-<%= form_with url: "/test/3.js", method: :post, format: :js,html: {id: "tres", class: 'question'}, remote: true do |form| %>
-  <%= form.label :answer, "How you can merge 2 branches witout generate a new commit for the merge:" %>
-  <%= form.text_area :answer %>
-  <%= form.submit "Done" %>
-<% end %>
+		<%= form_with url: "/test/3.js", method: :post, format: :js,html: {id: "tres", class: 'question'}, local: false do |form| %>
+		  <%= form.label :answer, "How you can merge 2 branches witout generate a new commit for the merge:" %>
+		  <%= form.text_area :answer, class: 'form-control' %>
+		  <%= form.submit "Send response", class: 'btn btn-primary' %>
+		<% end %>
+    
+  </div>
+</div>
+
+
 
 <style>
   .question{
@@ -66,6 +72,8 @@
       
       e = document.querySelector(`[id="${elemsStruct[phase].next}"]`);
       e.classList = "question show";
+      e = document.querySelector(`[id="question-no"]`);
+      e.html = `Question ${elemsStruct[phase].next}`;
     }
     
   }
