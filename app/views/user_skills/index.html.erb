@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<h3>My Skills</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Rank</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @user_skills %>
+      <% @user_skills.each do |u_skill| %>
+        <tr>
+          <td><%= u_skill.skill.name %></td>
+          <td><%= u_skill.rank %></td>
+          <td><%= link_to 'Show', u_skill %></td>
+          <td><%= link_to 'Edit', edit_user_skill_path(u_skill) %></td>
+          <td><%= link_to 'Destroy', u_skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= form_with(model: @user_skill) do |form| %>
+  <% if @user_skill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_skill.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user_skill.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <%= form.hidden_field :user_id, :value => 2 %>
+    <div class="form form-input" style="width: 50%;">
+      <label>Skill:</label>
+      <%= form.select :skill_id, Skill.where.not(:id => UserSkill.select(:skill_id).where(:user_id => 2)).order(:name).collect {|r| [r.name, r.id]}, { :include_blank => true }, { :class => 'form-control'} %>
+    </div>
+
+    <div class="form form-input" style="width: 20%;">
+      <label>Rank:</label>
+      <%= form.number_field :rank, min:0, max:5, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-actions mt-3">
+    <button type="submit" class="btn btn-dark">Add Skill</button>
+  </div>
+<% end %>

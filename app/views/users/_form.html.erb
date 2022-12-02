@@ -1,47 +1,51 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :full_name %>
-    <%= form.text_field :full_name %>
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-user"></i>
+    User
   </div>
+  <div class="card-body">
+    <%= form_with(model: user) do |form| %>
+      <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-  <div class="field">
-    <%= form.label :department %>
-    <%= form.text_field :department %>
-  </div>
+          <ul>
+            <% user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :summary %>
-    <%= form.text_area :summary %>
-  </div>
+      <div class="form form-input" style="width: 50%;">
+        <label>Ignition ID</label>
+        <%= form.number_field :ignition_id, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :ignition_id %>
-    <%= form.number_field :ignition_id %>
-  </div>
+      <div class="form form-input" style="width: 50%;">
+        <label for="full_name">Full Name</label>
+        <%= form.text_field :full_name, :class => 'form-control' %>
+      </div>
+            
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :department %>
+        <%= form.text_field :department, :class => 'form-control' %>
+      </div>
+            
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :summary %>
+        <%= form.text_area :summary, :class => 'form-control' %>
+      </div>
+            
+            
+      <!--div class="form form-input" style="width: 50%;">
+        <form.label :rank>
+        <form.number_field :rank, :class => 'form-control'>
+      </div-->
 
-  <div class="field">
-    <%= form.label :rank %>
-    <%= form.number_field :rank %>
+      <div class="form-actions mt-3">
+        <button type="submit" class="btn btn-dark">Save User</button>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <label>Skills:</label></br>
-    <%=collection_check_boxes(:user_skills, :id, @skills, :id, :name)%>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
