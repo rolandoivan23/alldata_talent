@@ -12,6 +12,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+<% unless controller.controller_name.start_with?('registrations') ||
+controller.controller_name.start_with?('sessions') %>
   <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -30,9 +32,14 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!"><i class="fas fa-star"></i> My Skills</a></li>
+                    <li><a class="dropdown-item" href="/user_skills"><i class="fas fa-star"></i> My Skills</a></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!"><i class="fas fa-right-from-bracket"></i> Logout</a></li>
+                    <li>
+                      <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do %>
+                        <i class="fas fa-right-from-bracket"></i>
+                        Logout
+                      <% end %>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -106,7 +113,10 @@
     <div id="layoutSidenav_content">
       <main>
         <div class="container-fluid px-4">
+<% end %>
           <%= yield %>
+<% unless controller.controller_name.start_with?('registrations') ||
+  controller.controller_name.start_with?('sessions') %>
         </div>
       </main>
     </div>
@@ -114,4 +124,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
   </body>
+<% end %>
+
 </html>

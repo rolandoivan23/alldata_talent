@@ -2,8 +2,7 @@ class UserSkillsController < ApplicationController
 
   # GET /user_skills or /user_skills.json
   def index
-    @user_skills = UserSkill.includes(:skill).where(:user_id => 2).order(:name)
-    puts @user_skills.first.skill.name
+    @user_skills = UserSkill.includes(:skill).where(:user_id => current_user.id).order(:name)
     @user_skill = UserSkill.new
   end
 

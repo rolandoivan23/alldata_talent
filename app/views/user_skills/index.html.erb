@@ -42,10 +42,10 @@
   <% end %>
 
   <div class="row">
-    <%= form.hidden_field :user_id, :value => 2 %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
     <div class="form form-input" style="width: 50%;">
       <label>Skill:</label>
-      <%= form.select :skill_id, Skill.where.not(:id => UserSkill.select(:skill_id).where(:user_id => 2)).order(:name).collect {|r| [r.name, r.id]}, { :include_blank => true }, { :class => 'form-control'} %>
+      <%= form.select :skill_id, Skill.where.not(:id => UserSkill.select(:skill_id).where(:user_id => current_user.id)).order(:name).collect {|r| [r.name, r.id]}, { :include_blank => true }, { :class => 'form-control'} %>
     </div>
 
     <div class="form form-input" style="width: 20%;">
