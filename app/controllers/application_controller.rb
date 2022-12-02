@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
     before_action :authenticate_user!
     helper_method :current_user
 
+    $stars = [
+      '☆☆☆☆☆',
+      '★☆☆☆☆',
+      '★★☆☆☆',
+      '★★★☆☆',
+      '★★★★☆',
+      '★★★★★'
+    ]
  protected
 
     def configure_permitted_parameters

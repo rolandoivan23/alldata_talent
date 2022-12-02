@@ -7,6 +7,9 @@
 			<div>
 				<span>
 					<%= user.full_name %>
+					<% if user.rank %>
+						<%= $stars[user.rank] %>
+					<% end %>
 				</span>
 				&nbsp;
 				<span>
