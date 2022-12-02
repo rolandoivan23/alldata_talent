@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @test.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @test.description %>
+</p>
+
+<p>
+  <strong>Total points:</strong>
+  <%= @test.total_points %>
+</p>
+
+<p>
+  <strong>Skill:</strong>
+  <%= @test.skill_id %>
+</p>
+
+<%= form_with url: "/test/1.js", method: :post, format: :js, html: {id: "uno", class: 'question show'}, remote: true do |form| %>
+  <%= form.label :answer, "What is the command to initialize a git repo:" %>
+  <%= form.text_area :answer %>
+  <%= form.submit "Done" %>
+<% end %>
+
+<%= form_with url: "/test/2.js", method: :post, format: :js,html: {id: "dos",  class: 'question'}, remote: true do |form| %>
+  <%= form.label :answer, "What is the command to view the comit history:" %>
+  <%= form.text_area :answer %>
+  <%= form.submit "Done" %>
+<% end %>
+
+<%= form_with url: "/test/3.js", method: :post, format: :js,html: {id: "tres", class: 'question'}, remote: true do |form| %>
+  <%= form.label :answer, "How you can merge 2 branches witout generate a new commit for the merge:" %>
+  <%= form.text_area :answer %>
+  <%= form.submit "Done" %>
+<% end %>
+
+<style>
+  .question{
+    display: none;
+  }
+  .show{
+    display: block;
+  }
+</style>
+
+<script>
+  let elemsStruct = {
+    1: {actual: "uno", next: "dos"},
+    2: {actual: "dos", next: "tres"},
+    3: {actual: "tres", next: null},
+  };
+
+  function right_answer(phase){
+    e = document.querySelector(`[id="${elemsStruct[phase].actual}"]`);
+    e.classList = "question";
+    if(elemsStruct[phase].next == null){
+      alert("Conseguiste la insignia de master en git");
+      //mostrar algo y gurdar en base de datos
+      return;
+    }else{
+      alert('Respuesta correcta');
+      
+      e = document.querySelector(`[id="${elemsStruct[phase].next}"]`);
+      e.classList = "question show";
+    }
+    
+  }
+
+  function bad_answer(phase){
+    alert('Intenta de nuevo')
+  }
+</script>
+
