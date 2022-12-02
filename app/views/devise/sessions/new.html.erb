@@ -1,0 +1,45 @@
+<body class="bg-primary">
+  <div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+      <main>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5">
+              <div class="card shadow-lg border-0 rounded-lg mt-5" style="margin-bottom: 3rem;">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                <div class="card-body">
+                  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                    <div class="form form-input mb-3">
+                      <label>Ignition ID</label>
+                      <%= f.number_field :ignition_id, autofocus: true, :class => "form-control" %>
+                    </div>
+                  
+                    <div class="form form-input mb-3">
+                      <%= f.label :password %><br />
+                      <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control' %>
+                    </div>
+                  
+                    <% if devise_mapping.rememberable? %>
+                      <div class="form-check mb-3">
+                        <%= f.check_box :remember_me, :class => "form-check-input" %>
+                        <%= f.label :remember_me, :class => "form-check-label" %>
+                      </div>
+                    <% end %>
+                  
+                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0 actions">
+                      <%= f.submit "Log in", :class => "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="card-footer text-center py-3">
+                  <div class="small"><a href="sign_up">Need an account? Sign up!</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>

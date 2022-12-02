@@ -1,27 +1,35 @@
-<%= form_with(model: skill) do |form| %>
-  <% if skill.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(skill.errors.count, "error") %> prohibited this skill from being saved:</h2>
-
-      <ul>
-        <% skill.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-star"></i>
+    Skill
   </div>
+  <div class="card-body">
+    <%= form_with(model: skill) do |form| %>
+      <% if skill.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(skill.errors.count, "error") %> prohibited this skill from being saved:</h2>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+          <ul>
+            <% skill.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :name %>
+        <%= form.text_field :name, :class => 'form-control' %>
+      </div>
+
+      <div class="form form-input" style="width: 50%;">
+        <%= form.label :description %>
+        <%= form.text_area :description, :class => 'form-control' %>
+      </div>
+
+      <div class="form-actions mt-3">
+      <button type="submit" class="btn btn-dark">Save Skill</button>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
