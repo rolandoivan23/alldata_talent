@@ -66,6 +66,7 @@ class UsersController < ApplicationController
   def find_results
     skill = Skill.where("upper(name) LIKE ?", "%#{params[:query].upcase}%")
     users = User.where("upper(full_name) LIKE ? ", "%#{params[:query].upcase}%" )
+    @posts = Post.where("upper(title) LIKE ? ", "%#{params[:query].upcase}%" ).or(Post.where("upper(content) LIKE ? ", "%#{params[:query].upcase}%" ))
     if skill
       users_skills = UserSkill.where(skill: skill)
       users_by_skill = users_skills.map(&method(:map_user_with_rank)).sort_by{|e| -e[:rank]}

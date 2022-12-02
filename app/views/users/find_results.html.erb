@@ -21,6 +21,22 @@
 				</span>
 			</div>
 			<hr>
-		<% end %>		
-	</div>
+		<% end %>
+		
+		</div>
+		<h2>Posts Found</h2>
+		<div style="margin-top: 10px;">
+			<% @posts.each do |post| %>
+				<div>
+					<span>
+						<%= post.title %>
+					</span>
+					&nbsp;
+					<span>
+						<%= link_to 'Show', post %>
+					</span>
+				</div>
+				<hr>
+			<% end %>
+		</div>
 </div>
